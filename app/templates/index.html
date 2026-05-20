@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Telecom Customer Churn Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+        }
+        input[type="text"], select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button-green {
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button-green:hover {
+            background-color: #218838;
+        }
+        #prediction-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #prediction {
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1><strong>Telecom Customer Churn Prediction</strong></h1>
+
+    <!-- Prediction Result -->
+    <div id="prediction-container">
+        <h3 id="prediction">
+            {% if prediction == "Churn" %}
+                <span style="color:red;">⚠️ This customer is likely to churn!</span>
+            {% elif prediction == "No Churn" %}
+                <span style="color:green;">✅ This customer is likely to stay!</span>
+            {% endif %}
+        </h3>
+    </div>
+
+    <!-- Input Form -->
+    <form action="/predict" method="post">
+
+        <label>International Plan:</label>
+        <select name="international_plan">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label>Voice Mail Plan:</label>
+        <select name="voice_mail_plan">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label>Account Length:</label>
+        <input type="text" name="account_length" required>
+
+        <label>Number of Voicemail Messages:</label>
+        <input type="text" name="number_vmail_messages" required>
+
+        <label>Total Day Minutes:</label>
+        <input type="text" name="total_day_minutes" required>
+
+        <label>Total Day Calls:</label>
+        <input type="text" name="total_day_calls" required>
+
+        <label>Total Evening Minutes:</label>
+        <input type="text" name="total_eve_minutes" required>
+
+        <label>Total Evening Calls:</label>
+        <input type="text" name="total_eve_calls" required>
+
+        <label>Total Night Minutes:</label>
+        <input type="text" name="total_night_minutes" required>
+
+        <label>Total Night Calls:</label>
+        <input type="text" name="total_night_calls" required>
+
+        <label>Total International Minutes:</label>
+        <input type="text" name="total_intl_minutes" required>
+
+        <label>Total International Calls:</label>
+        <input type="text" name="total_intl_calls" required>
+
+        <label>Customer Service Calls:</label>
+        <input type="text" name="customer_service_calls" required>
+
+        <input type="submit" value="Predict" class="button-green">
+
+    </form>
+
+</div>
+</body>
+</html>
